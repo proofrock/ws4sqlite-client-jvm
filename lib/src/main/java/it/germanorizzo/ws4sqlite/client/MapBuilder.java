@@ -19,10 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <p>Simple builder for maps used in RequestItem.addValues() (so, Map&lt;String, Object&gt;).</p>
+ * <p>Simple builder for maps used in {@link RequestBuilder#withValues(MapBuilder)} or
+ * {@link RequestBuilder#withValues(Map)}.</p>
+ *
  * <p>Usage:</p>
  * <pre>
- *     addValues(new MapBuilder().add("key", "value").add("num", 2)
+ *     .addValues(new MapBuilder().add("key", "value").add("num", 2))
+ *     // final call to .build() is optional
  * </pre>
  */
 @SuppressWarnings("unused")
@@ -34,14 +37,18 @@ public final class MapBuilder {
      *
      * @param key   The key
      * @param value The value
-     * @return The MapBuilder, for chaining
+     * @return The {@link MapBuilder}, for chaining
      */
     public MapBuilder add(String key, Object value) {
         map.put(key, value);
         return this;
     }
 
-    Map<String, Object> getMap() {
+    /**
+     * Returns the map that was built.
+     * @return The underlying Map&lt;String, Object&gt;
+     */
+    public Map<String, Object> build() {
         return map;
     }
 }

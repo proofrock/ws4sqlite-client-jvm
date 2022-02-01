@@ -18,9 +18,14 @@ package it.germanorizzo.ws4sqlite.client;
 import java.io.IOException;
 
 @SuppressWarnings("unused")
+/**
+ * <p>This is an exception that wraps the error structure of ws4sqlite. See
+ * <a href="https://germ.gitbook.io/ws4sqlite/documentation/errors#global-errors">the docs</a>".</p>
+ *
+ * <p>It has fields for the index of the node that failed, and for the HTTP code.</p>
+ */
 public class ClientException extends IOException {
     private final int qryIdx, code;
-
 
     ClientException(String message, int qryIdx, int code) {
         super(message);

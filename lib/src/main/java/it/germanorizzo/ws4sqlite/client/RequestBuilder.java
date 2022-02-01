@@ -6,7 +6,8 @@ import static it.germanorizzo.ws4sqlite.client.Utils.check;
 import static it.germanorizzo.ws4sqlite.client.Utils.require;
 
 /**
- * A builder class to build a request to send to the ws4sqlite server.
+ * A builder class to build a {@link Request} to send to the ws4sqlite server with the {@link Client#send(Request)}
+ * method.
  */
 @SuppressWarnings("unused")
 public final class RequestBuilder {
@@ -25,14 +26,16 @@ public final class RequestBuilder {
     private Map<String, Object> temp = null;
 
     /**
-     * First step when building. Generates a new RequestBuilder instance.
-     *
-     * @return A new (empty) RequestBuilder instance
+     * First step when building. Generates a new {@link RequestBuilder} instance.
      */
-    public static RequestBuilder make() {
-        return new RequestBuilder();
+    public RequestBuilder() {
     }
 
+    /**
+     * Returns the {@link Request} that was built.
+     *
+     * @return The underlying {@link Request}
+     */
     public Request build() {
         require(temp != null, "There are no requests");
         request.add(temp);
@@ -40,7 +43,7 @@ public final class RequestBuilder {
         Request ret = new Request();
         Map<String, Object> req = new HashMap<>();
         req.put(K_TRX, request);
-        ret.request = req;
+        ret.map = req;
         return ret;
     }
 
@@ -49,7 +52,7 @@ public final class RequestBuilder {
      * proper methods.
      *
      * @param query The query
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     public RequestBuilder addQuery(String query) {
         check(query != null, "Cannot specify a null query");
@@ -61,6 +64,13 @@ public final class RequestBuilder {
         return this;
     }
 
+    /**
+     * Adds a new request to the list, for a statement. It must be configured later on with the
+     * proper methods.
+     *
+     * @param statement The statement
+     * @return The {@link RequestBuilder}, for chaining
+     */
     public RequestBuilder addStatement(String statement) {
         check(statement != null, "Cannot specify a null statement");
         if (temp != null) {
@@ -74,7 +84,7 @@ public final class RequestBuilder {
     /**
      * Specify that the last opened request must not cause a general failure.
      *
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     public RequestBuilder withNoFail() {
         temp.put(K_NO_FAIL, Boolean.TRUE);
@@ -86,7 +96,7 @@ public final class RequestBuilder {
      * it creates a batch.
      *
      * @param values The values map to add
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     @SuppressWarnings("unchecked")
     public RequestBuilder withValues(Map<String, Object> values) {
@@ -114,11 +124,11 @@ public final class RequestBuilder {
      * it creates a batch.
      *
      * @param values The values map to add
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     public RequestBuilder withValues(MapBuilder values) {
         check(values != null, "Cannot specify a null argument");
-        return withValues(values.getMap());
+        return withValues(values.build());
     }
 
     /**
@@ -127,7 +137,7 @@ public final class RequestBuilder {
      * @param password         The password for the encryption
      * @param compressionLevel The ZStd compression level, in the range 1-19
      * @param columns          The columns to encrypt
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     public RequestBuilder withEncoderAndCompression(String password, int compressionLevel, String... columns) {
         check(password != null, "Cannot specify a null password");
@@ -147,7 +157,7 @@ public final class RequestBuilder {
      *
      * @param password The password for the encryption
      * @param columns  The columns to encrypt
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     public RequestBuilder withEncoder(String password, String... columns) {
         check(password != null, "Cannot specify a null password");
@@ -165,7 +175,7 @@ public final class RequestBuilder {
      *
      * @param password The password for the decryption
      * @param columns  The columns to decrypt
-     * @return The RequestBuilder, for chaining
+     * @return The {@link RequestBuilder}, for chaining
      */
     public RequestBuilder withDecoder(String password, String... columns) {
         check(password != null, "Cannot specify a null password");
@@ -176,9 +186,5 @@ public final class RequestBuilder {
         decoder.put(K_COLUMNS, Arrays.asList(columns));
         temp.put(K_ENCODER, decoder);
         return this;
-    }
-
-    public static class Request {
-        Map<String, Object> request;
     }
 }

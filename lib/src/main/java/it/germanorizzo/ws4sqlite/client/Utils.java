@@ -1,5 +1,8 @@
 package it.germanorizzo.ws4sqlite.client;
 
+/**
+ * Internal utility class
+ */
 public class Utils {
     private Utils() {
     }
