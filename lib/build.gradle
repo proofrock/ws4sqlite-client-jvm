@@ -9,11 +9,10 @@
 // TODO https://docs.gradle.org/current/userguide/publishing_setup.html
 
 plugins {
-    // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
 }
 
-group = 'it.germanorizzo'
+group = 'it.germanorizzo.ws4sqlite'
 archivesBaseName = 'Ws4sqliteClient'
 version = '0.9.0RC1'
 
@@ -24,11 +23,11 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
 }
 
@@ -47,9 +46,9 @@ java {
     withJavadocJar()
 }
 
-jar {
-    manifest {
-        attributes('Implementation-Title': project.name,
-                   'Implementation-Version': project.version)
-    }
+ext {
+    PUBLISH_GROUP_ID = group
+    PUBLISH_VERSION = version
+    PUBLISH_ARTIFACT_ID = archivesBaseName
 }
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
