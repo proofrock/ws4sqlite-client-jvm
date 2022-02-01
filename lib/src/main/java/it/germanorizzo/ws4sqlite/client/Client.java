@@ -77,7 +77,7 @@ public final class Client {
 
     /**
      * <p>Sends a set of requests to the remote, wrapped in a {@link Request} object. Returns
-     * a matching set of responses, wrapped in a {@link Response} object.<p>
+     * a matching set of responses, wrapped in a {@link Response} object.</p>
      * <p>Throws a {@link ClientException} if the remote service returns an error.</p>
      *
      * @param request The request(s) wrapper
