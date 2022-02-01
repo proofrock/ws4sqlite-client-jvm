@@ -6,8 +6,6 @@
  * User Manual available at https://docs.gradle.org/7.3.3/userguide/building_java_projects.html
  */
 
-// TODO https://docs.gradle.org/current/userguide/publishing_setup.html
-
 plugins {
     id 'java-library'
 }
