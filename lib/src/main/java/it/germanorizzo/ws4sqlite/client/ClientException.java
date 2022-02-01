@@ -29,7 +29,9 @@ public class ClientException extends IOException {
     }
 
     /**
-     * The 0-based index of the failing query, -1 if it's a general failure.
+     * The 0-based index of the failing sub-request, -1 if it's a general failure.
+     *
+     * @return Index of the request that failed.
      */
     public int getQryIdx() {
         return qryIdx;
@@ -37,6 +39,8 @@ public class ClientException extends IOException {
 
     /**
      * The HTTP code of the error.
+     *
+     * @return HTTP code of the error (400, 401, 404 or 500)
      */
     public int getCode() {
         return code;
