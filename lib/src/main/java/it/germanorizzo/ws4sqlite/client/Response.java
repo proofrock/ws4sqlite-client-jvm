@@ -21,7 +21,8 @@ import java.util.Map;
 
 /**
  * Response coming from the endpoint, that is a list of single responses
- * matching the list of request that were submitted.
+ * matching the list of request that were submitted. The single responses
+ * are of type {@link Response.Item}.
  */
 public class Response {
     private final List<Item> results = new ArrayList<>();
@@ -36,7 +37,17 @@ public class Response {
     }
 
     /**
-     * Singular response coming from the endpoint
+     * <p>Single response coming from ws4sqlite. Every Item matches a node of the request,
+     * and each one has exactly one of the following fields populated/not null:</p>
+     * <ul>
+     * <li>{@link Item#getError()}: reason for the error, if it wasn't successful;</li>
+     * <li>{@link Item#getRowsUpdated()}: if the node was a statement and no batching was involved; it's the number of
+     * updated rows;</li>
+     * <li>{@link Item#getRowsUpdatedBatch()}: if the node was a statement and a batch of values was provided; it's a
+     * List of the numbers of updated rows for each batch item;</li>
+     * <li>{@link Item#getResultSet()}: if the node was a query; it's a List of Map()s with an item per returned record,
+     * and each map has the name of the filed as a key of each entry, and the value as a value.</li>
+     * </ul>
      */
     public static class Item {
         private final boolean success;

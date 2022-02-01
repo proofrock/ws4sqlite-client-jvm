@@ -1,5 +1,5 @@
 .vscode/
-notes
+/notes
 /local.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/java,visualstudiocode,gradle,macos,linux,intellij+all

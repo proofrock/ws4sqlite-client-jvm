@@ -44,11 +44,12 @@ class LibraryTest {
 
     @Test
     void requestWithHTTPAuth() throws IOException {
-        Client client = Client.make()
+        Client client = new ClientBuilder()
                 .withURLComponents(Client.Protocol.HTTP, "localhost", 12321, "mydb")
-                .withHTTPAuth("myUser1", "myHotPassword");
+                .withHTTPAuth("myUser1", "myHotPassword")
+                .build();
 
-        RequestBuilder.Request req = RequestBuilder.make()
+        Request req = new RequestBuilder()
                 .addQuery("SELECT * FROM TEMP")
 
                 .addQuery("SELECT * FROM TEMP WHERE ID = :id")
@@ -86,11 +87,12 @@ class LibraryTest {
 
     @Test
     void requestWithInlineAuth() throws IOException {
-        Client client = Client.make()
+        Client client = new ClientBuilder()
                 .withURLComponents(Client.Protocol.HTTP, "localhost", 12321, "mydb2")
-                .withInlineAuth("myUser1", "myHotPassword");
+                .withInlineAuth("myUser1", "myHotPassword")
+                .build();
 
-        RequestBuilder.Request req = RequestBuilder.make()
+        Request req = new RequestBuilder()
                 .addQuery("SELECT * FROM TEMP")
 
                 .addQuery("SELECT * FROM TEMP WHERE ID = :id")
