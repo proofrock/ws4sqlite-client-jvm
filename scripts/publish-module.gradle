@@ -2,7 +2,7 @@
 
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
-
+ 
 afterEvaluate {
     publishing {
         publications {
