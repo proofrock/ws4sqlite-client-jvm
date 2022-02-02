@@ -21,21 +21,21 @@ In maven:
 <dependency>
     <groupId>it.germanorizzo.ws4sqlite</groupId>
     <artifactId>ws4sqlite-client-jvm</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
 </dependency>
 ```
 
 Or gradle:
 
 ```
-implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.9.0'
+implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.9.1'
 ```
 
 # Usage
 
 This is a translation in Java code of the "everything included" request documented in 
 [the docs](https://germ.gitbook.io/ws4sqlite/documentation/requests). It shows the usage, overall; please refer to the
-[javadocs]( https://javadoc.io/doc/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm) for details.
+[javadocs](https://javadoc.io/doc/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm) for details.
 
 ```java
 // Prepare a client for the transmission. It can be saved in a static final field,
