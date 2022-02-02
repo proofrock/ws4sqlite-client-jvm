@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'it.germanorizzo.ws4sqlite'
-archivesBaseName = 'Ws4sqliteClient'
+archivesBaseName = 'ws4sqlite-client-jvm'
 version = '0.9.1'
 
 repositories {
