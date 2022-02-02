@@ -35,7 +35,7 @@ implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm',
 
 This is a translation in Java code of the "everything included" request documented in 
 [the docs](https://germ.gitbook.io/ws4sqlite/documentation/requests). It shows the usage, overall; please refer to the
-[javadocs]( https://javadoc.io/doc/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm) for details.
+[javadocs](https://javadoc.io/doc/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm) for details.
 
 ```java
 // Prepare a client for the transmission. It can be saved in a static final field,
