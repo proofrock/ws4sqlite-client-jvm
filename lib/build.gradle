@@ -12,7 +12,7 @@ plugins {
 
 group = 'it.germanorizzo.ws4sqlite'
 archivesBaseName = 'ws4sqlite-client-jvm'
-version = '0.9.1'
+version = '0.9.1.1'
 
 repositories {
     // Use Maven Central for resolving dependencies.
