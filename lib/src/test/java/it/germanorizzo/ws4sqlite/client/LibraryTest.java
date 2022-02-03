@@ -113,6 +113,7 @@ class LibraryTest {
 
         Response res = client.send(req);
 
+        assertEquals(200, res.getStatusCode());
         assertEquals(5, res.getResults().size());
         assertTrue(res.getResults().get(0).isSuccess());
         assertEquals(2, res.getResults().get(0).getResultSet().size());

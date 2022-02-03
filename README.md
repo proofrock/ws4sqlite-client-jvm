@@ -85,6 +85,9 @@ try {
     return;
 }
 
+// Code is 200, because all was exception-less
+assert (res.getStatusCode() == 200);
+
 // Unpacking of the response. Every Response.Item matches a node of the request, 
 // and each one has exactly one of the following fields populated/not null:
 // - getError(): reason for the error, if it wasn't successful;

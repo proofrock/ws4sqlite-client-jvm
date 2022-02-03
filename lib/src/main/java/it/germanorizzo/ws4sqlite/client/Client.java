@@ -122,7 +122,7 @@ public final class Client {
 
         final Map m = OM.readValue(jsonRes, Map.class);
 
-        final Response ret = new Response();
+        final Response ret = new Response(code);
         for (int i = 0; i < ((List<Map>) m.get("results")).size(); i++) {
             final Map ri = ((List<Map>) m.get("results")).get(i);
             ret.getResults().add(new Response.Item(
