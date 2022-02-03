@@ -21,8 +21,6 @@ import static it.germanorizzo.ws4sqlite.client.Utils.check;
  * <p>This class is a builder for {@link Client} instances. Once configured with the URL to
  * contact and the authorization (if any), it can be used to instantiate a {@link Client}.</p>
  *
- * <p>The class is thread-safe and, once built, can be safely stored in a constant.</p>
- *
  * <p>Example:</p>
  * <pre>
  * Client cli = new ClientBuilder()
@@ -106,7 +104,7 @@ public final class ClientBuilder {
     }
 
     /**
-     * Builder methods that configures INLINE authentication; it must be configured so in the remote.
+     * Builder methods that configures INLINE authentication; the remote must be configured accordingly.
      *
      * @param user The username
      * @param pass The password
@@ -119,7 +117,7 @@ public final class ClientBuilder {
     }
 
     /**
-     * Builder methods that configures HTTP Basic Authentication; it must be configured so in the remote.
+     * Builder methods that configures HTTP Basic Authentication; the remote must be configured accordingly.
      *
      * @param user The username
      * @param pass The password

@@ -82,7 +82,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Specify that the last opened request must not cause a general failure.
+     * Specify that the request must not cause a general failure.
      *
      * @return The {@link RequestBuilder}, for chaining
      */
@@ -92,7 +92,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Adds a values set (ok, map) for the last opened request. If there's already one,
+     * Adds a list of values (ok, amap) for the request. If there's already one,
      * it creates a batch.
      *
      * @param values The values map to add
@@ -120,7 +120,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Adds a values set (well, map) for the last opened request. If there's already one,
+     * Adds a list of values (well, a map) for the request. If there's already one,
      * it creates a batch.
      *
      * @param values The values map to add
@@ -132,7 +132,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Add to the last opened request an encoder, with compression. Allowed only for statements.
+     * Add an encoder to the request, with compression. Allowed only for statements.
      *
      * @param password         The password for the encryption
      * @param compressionLevel The ZStd compression level, in the range 1-19
@@ -153,7 +153,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Add to the last opened request an encoder. Allowed only for statements.
+     * Add an encoder to the request. Allowed only for statements.
      *
      * @param password The password for the encryption
      * @param columns  The columns to encrypt
@@ -171,7 +171,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Add to the last opened request a decoder. Allowed only for queries.
+     * Add a decoder to the request. Allowed only for queries.
      *
      * @param password The password for the decryption
      * @param columns  The columns to decrypt
