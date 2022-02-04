@@ -25,11 +25,11 @@ import java.io.IOException;
  * <p>It has fields for the index of the node that failed, and for the HTTP code.</p>
  */
 public class ClientException extends IOException {
-    private final int qryIdx, code;
+    private final int reqIdx, code;
 
-    ClientException(String message, int qryIdx, int code) {
+    ClientException(String message, int reqIdx, int code) {
         super(message);
-        this.qryIdx = qryIdx;
+        this.reqIdx = reqIdx;
         this.code = code;
     }
 
@@ -38,8 +38,8 @@ public class ClientException extends IOException {
      *
      * @return Index of the request that failed.
      */
-    public int getQryIdx() {
-        return qryIdx;
+    public int getReqIdx() {
+        return reqIdx;
     }
 
     /**

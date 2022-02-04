@@ -23,7 +23,7 @@ import java.util.Map;
  * Response coming from the endpoint, that is a list of single responses
  * matching the list of request that were submitted. The single responses
  * are of type {@link Response.Item}.
- *
+ * <p>
  * It also includes the HTTP Status Code returned by the communication with
  * the server.
  */

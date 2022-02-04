@@ -43,35 +43,14 @@ import java.util.Objects;
  */
 @SuppressWarnings("unused")
 public final class Client {
-    /**
-     * Authentication mode for the database remote.
-     */
-    public enum AuthMode {
-        HTTP, INLINE, NONE
-    }
-
-    /**
-     * Used in URL composition
-     */
-    public enum Protocol {
-        HTTP, HTTPS
-    }
-
-    private static class Err {
-        public int qryIdx, code;
-        public String error;
-    }
-
     private static final ObjectMapper OM = new ObjectMapper().setSerializationInclusion(Include.NON_NULL);
     private static final OkHttpClient CLIENT = new OkHttpClient.Builder().build();
-
-    private final String url, user, pass;
+    private final String url, user, password;
     private final AuthMode authMode;
-
-    Client(String url, String user, String pass, AuthMode authMode) {
+    Client(String url, String user, String password, AuthMode authMode) {
         this.url = url;
         this.user = user;
-        this.pass = pass;
+        this.password = password;
         this.authMode = authMode;
     }
 
@@ -88,13 +67,13 @@ public final class Client {
     @SuppressWarnings({"unchecked", "rawtypes"})
     public Response send(Request request) throws IOException {
         assert user != null;
-        assert pass != null;
+        assert password != null;
         assert url != null;
 
         final Map<String, Object> map = request.map;
 
         if (authMode == AuthMode.INLINE)
-            map.put("credentials", new MapBuilder().add("user", user).add("pass", pass).build());
+            map.put("credentials", new MapBuilder().add("user", user).add("password", password).build());
 
         final String json = OM.writeValueAsString(map);
 
@@ -102,7 +81,7 @@ public final class Client {
 
         okhttp3.Request.Builder requestBuilder = new okhttp3.Request.Builder();
         if (authMode == AuthMode.HTTP) {
-            requestBuilder = requestBuilder.addHeader("Authorization", Credentials.basic(user, pass));
+            requestBuilder = requestBuilder.addHeader("Authorization", Credentials.basic(user, password));
         }
 
         final okhttp3.Request req = requestBuilder.url(url).post(body).build();
@@ -117,7 +96,7 @@ public final class Client {
                 throw new ClientException("Unauthorized", -1, 401);
             }
             final Err err = OM.readValue(jsonRes, Err.class);
-            throw new ClientException(err.error, err.qryIdx, err.code);
+            throw new ClientException(err.error, err.reqIdx, err.code);
         }
 
         final Map m = OM.readValue(jsonRes, Map.class);
@@ -134,5 +113,23 @@ public final class Client {
         }
 
         return ret;
+    }
+    /**
+     * Authentication mode for the database remote.
+     */
+    public enum AuthMode {
+        HTTP, INLINE, NONE
+    }
+
+    /**
+     * Used in URL composition
+     */
+    public enum Protocol {
+        HTTP, HTTPS
+    }
+
+    private static class Err {
+        public int reqIdx, code;
+        public String error;
     }
 }

@@ -46,6 +46,7 @@ public final class MapBuilder {
 
     /**
      * Returns the map that was built.
+     *
      * @return The underlying Map&lt;String, Object&gt;
      */
     public Map<String, Object> build() {

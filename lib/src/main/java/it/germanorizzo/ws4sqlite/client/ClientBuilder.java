@@ -33,28 +33,28 @@ import static it.germanorizzo.ws4sqlite.client.Utils.check;
  */
 @SuppressWarnings("unused")
 public final class ClientBuilder {
-    private final String url, user, pass;
+    private final String url, user, password;
     private final Client.AuthMode authMode;
 
     /**
      * First step when building. Generates a new {@link ClientBuilder} instance.
      */
     public ClientBuilder() {
-        this.url = this.user = this.pass = null;
+        this.url = this.user = this.password = null;
         this.authMode = Client.AuthMode.NONE;
     }
 
     private ClientBuilder(ClientBuilder old, String url) {
         this.url = url;
         this.user = old.user;
-        this.pass = old.pass;
+        this.password = old.password;
         this.authMode = old.authMode;
     }
 
-    private ClientBuilder(ClientBuilder old, String user, String pass, Client.AuthMode authMode) {
+    private ClientBuilder(ClientBuilder old, String user, String password, Client.AuthMode authMode) {
         this.url = old.url;
         this.user = user;
-        this.pass = pass;
+        this.password = password;
         this.authMode = authMode;
     }
 
@@ -106,27 +106,27 @@ public final class ClientBuilder {
     /**
      * Builder methods that configures INLINE authentication; the remote must be configured accordingly.
      *
-     * @param user The username
-     * @param pass The password
+     * @param user     The username
+     * @param password The password
      * @return The {@link ClientBuilder}, for chaining
      */
-    public ClientBuilder withInlineAuth(String user, String pass) {
+    public ClientBuilder withInlineAuth(String user, String password) {
         check(user != null, "Cannot specify a null user");
-        check(pass != null, "Cannot specify a null password");
-        return new ClientBuilder(this, user, pass, Client.AuthMode.INLINE);
+        check(password != null, "Cannot specify a null password");
+        return new ClientBuilder(this, user, password, Client.AuthMode.INLINE);
     }
 
     /**
      * Builder methods that configures HTTP Basic Authentication; the remote must be configured accordingly.
      *
-     * @param user The username
-     * @param pass The password
+     * @param user     The username
+     * @param password The password
      * @return The {@link ClientBuilder}, for chaining
      */
-    public ClientBuilder withHTTPAuth(String user, String pass) {
+    public ClientBuilder withHTTPAuth(String user, String password) {
         check(user != null, "Cannot specify a null user");
-        check(pass != null, "Cannot specify a null password");
-        return new ClientBuilder(this, user, pass, Client.AuthMode.HTTP);
+        check(password != null, "Cannot specify a null password");
+        return new ClientBuilder(this, user, password, Client.AuthMode.HTTP);
     }
 
     /**
@@ -135,6 +135,6 @@ public final class ClientBuilder {
      * @return The underlying {@link Client}
      */
     public Client build() {
-        return new Client(url, user, pass, authMode);
+        return new Client(url, user, password, authMode);
     }
 }
