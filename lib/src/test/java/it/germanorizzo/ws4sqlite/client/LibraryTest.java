@@ -32,7 +32,7 @@ class LibraryTest {
     void setUp() throws Exception {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-        p = Runtime.getRuntime().exec("src/test/resources/ws4sqlite-0.9.0-macos --cfgDir src/test/resources");
+        p = Runtime.getRuntime().exec("src/test/resources/ws4sqlite-0.10.0-macos --cfg-dir src/test/resources");
 
         Thread.sleep(1000);
     }
@@ -113,6 +113,7 @@ class LibraryTest {
 
         Response res = client.send(req);
 
+        assertEquals(200, res.getStatusCode());
         assertEquals(5, res.getResults().size());
         assertTrue(res.getResults().get(0).isSuccess());
         assertEquals(2, res.getResults().get(0).getResultSet().size());

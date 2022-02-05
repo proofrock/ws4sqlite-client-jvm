@@ -19,9 +19,9 @@ public final class RequestBuilder {
     private static final String K_BATCH = "valuesBatch";
     private static final String K_ENCODER = "encoder";
     private static final String K_DECODER = "decoder";
-    private static final String K_PASSWORD = "pwd";
+    private static final String K_PASSWORD = "password";
     private static final String K_Z_LEVEL = "compressionLevel";
-    private static final String K_COLUMNS = "columns";
+    private static final String K_FIELDS = "fields";
     private final List<Map<String, Object>> request = new ArrayList<>();
     private Map<String, Object> temp = null;
 
@@ -82,7 +82,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Specify that the last opened request must not cause a general failure.
+     * Specify that the request must not cause a general failure.
      *
      * @return The {@link RequestBuilder}, for chaining
      */
@@ -92,7 +92,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Adds a values set (ok, map) for the last opened request. If there's already one,
+     * Adds a list of values (ok, amap) for the request. If there's already one,
      * it creates a batch.
      *
      * @param values The values map to add
@@ -120,7 +120,7 @@ public final class RequestBuilder {
     }
 
     /**
-     * Adds a values set (well, map) for the last opened request. If there's already one,
+     * Adds a list of values (well, a map) for the request. If there's already one,
      * it creates a batch.
      *
      * @param values The values map to add
@@ -132,58 +132,58 @@ public final class RequestBuilder {
     }
 
     /**
-     * Add to the last opened request an encoder, with compression. Allowed only for statements.
+     * Add an encoder to the request, with compression. Allowed only for statements.
      *
      * @param password         The password for the encryption
      * @param compressionLevel The ZStd compression level, in the range 1-19
-     * @param columns          The columns to encrypt
+     * @param fields           The fields to encrypt
      * @return The {@link RequestBuilder}, for chaining
      */
-    public RequestBuilder withEncoderAndCompression(String password, int compressionLevel, String... columns) {
+    public RequestBuilder withEncoderAndCompression(String password, int compressionLevel, String... fields) {
         check(password != null, "Cannot specify a null password");
         check(compressionLevel >= 1 && compressionLevel <= 19, "CompressionLevel must be between 1 and 19");
-        check(columns.length > 0, "Cannot specify an empty column list");
+        check(fields.length > 0, "Cannot specify an empty column list");
         check(!temp.containsKey(K_QUERY), "Cannot specify an encoder for a query");
         Map<String, Object> encoder = new HashMap<>();
         encoder.put(K_PASSWORD, password);
         encoder.put(K_Z_LEVEL, compressionLevel);
-        encoder.put(K_COLUMNS, Arrays.asList(columns));
+        encoder.put(K_FIELDS, Arrays.asList(fields));
         temp.put(K_ENCODER, encoder);
         return this;
     }
 
     /**
-     * Add to the last opened request an encoder. Allowed only for statements.
+     * Add an encoder to the request. Allowed only for statements.
      *
      * @param password The password for the encryption
-     * @param columns  The columns to encrypt
+     * @param fields   The fields to encrypt
      * @return The {@link RequestBuilder}, for chaining
      */
-    public RequestBuilder withEncoder(String password, String... columns) {
+    public RequestBuilder withEncoder(String password, String... fields) {
         check(password != null, "Cannot specify a null password");
-        check(columns.length > 0, "Cannot specify an empty column list");
+        check(fields.length > 0, "Cannot specify an empty column list");
         check(!temp.containsKey(K_QUERY), "Cannot specify an encoder for a query");
         Map<String, Object> encoder = new HashMap<>();
         encoder.put(K_PASSWORD, password);
-        encoder.put(K_COLUMNS, Arrays.asList(columns));
+        encoder.put(K_FIELDS, Arrays.asList(fields));
         temp.put(K_ENCODER, encoder);
         return this;
     }
 
     /**
-     * Add to the last opened request a decoder. Allowed only for queries.
+     * Add a decoder to the request. Allowed only for queries.
      *
      * @param password The password for the decryption
-     * @param columns  The columns to decrypt
+     * @param fields   The fields to decrypt
      * @return The {@link RequestBuilder}, for chaining
      */
-    public RequestBuilder withDecoder(String password, String... columns) {
+    public RequestBuilder withDecoder(String password, String... fields) {
         check(password != null, "Cannot specify a null password");
-        check(columns.length > 0, "Cannot specify an empty column list");
+        check(fields.length > 0, "Cannot specify an empty column list");
         check(!temp.containsKey(K_STATEMENT), "Cannot specify a decoder for a statement");
         Map<String, Object> decoder = new HashMap<>();
         decoder.put(K_PASSWORD, password);
-        decoder.put(K_COLUMNS, Arrays.asList(columns));
+        decoder.put(K_FIELDS, Arrays.asList(fields));
         temp.put(K_ENCODER, decoder);
         return this;
     }

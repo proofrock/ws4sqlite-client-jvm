@@ -1,7 +1,5 @@
 # 🌱 ws4sqlite client for JVM languages
 
-[![javadoc](https://javadoc.io/badge2/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm/javadoc.svg)](https://javadoc.io/doc/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm)
-
 This is an implementation of a client for [ws4sqlite](https://github.com/proofrock/ws4sqlite) to use with JVM-based
 languages. It adds convenience to the communication, by not having to deal with JSON, by performing checks for the 
 requests being well formed and by mapping errors to JDK's exceptions.
@@ -9,7 +7,7 @@ requests being well formed and by mapping errors to JDK's exceptions.
 ## Compatibility
 
 Each client's minor release is guaranteed to be compatible with the matching minor release of ws4sqlite. So, for
-ws4sqlite's version `0.9.0`, use any of the client's `0.9.x` versions.
+ws4sqlite's version `0.10.0`, use any of the client's `0.10.x` versions.
 
 The library requires Java 8 or higher.
 
@@ -21,14 +19,14 @@ In maven:
 <dependency>
     <groupId>it.germanorizzo.ws4sqlite</groupId>
     <artifactId>ws4sqlite-client-jvm</artifactId>
-    <version>0.9.1.1</version>
+    <version>0.10.0</version>
 </dependency>
 ```
 
 Or gradle:
 
 ```
-implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.9.1.1'
+implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.10.0'
 ```
 
 # Usage
@@ -78,7 +76,7 @@ try {
     // https://germ.gitbook.io/ws4sqlite/documentation/errors#global-errors
     // It is a subclass of IOException, so catch it accordingly
     System.err.format("HTTP Code: %d\n", ce.getCode());
-    System.err.format("At subrequest: %d\n", ce.getQryIdx());
+    System.err.format("At subrequest: %d\n", ce.getReqIdx());
     System.err.format("Error: %s\n", ce.getMessage());
     return;
 } catch (IOException e) {
@@ -86,6 +84,9 @@ try {
     e.printStackTrace();
     return;
 }
+
+// Code is 200, because all was exception-less
+assert (res.getStatusCode() == 200);
 
 // Unpacking of the response. Every Response.Item matches a node of the request, 
 // and each one has exactly one of the following fields populated/not null:
@@ -110,3 +111,5 @@ System.out.format("How many records had the 1st response? %d\n",
 System.out.format("What was the first VAL returned? %s\n",
         res.getResults().get(0).getResultSet().get(0).get("VAL"));
 ```
+
+The encryption extension is supported and [documented](https://javadoc.io/doc/it.germanorizzo.ws4sqlite/ws4sqlite-client-jvm). 
