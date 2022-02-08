@@ -32,7 +32,9 @@ class LibraryTest {
     void setUp() throws Exception {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
-        p = Runtime.getRuntime().exec("src/test/resources/ws4sqlite-0.10.0-macos --cfg-dir src/test/resources");
+        p = Runtime.getRuntime().exec(
+                "src/test/resources/ws4sqlite-0.11.0-macos --mem-db mydb:src/test/resources/mydb.yaml --mem-db mydb2:src/test/resources/mydb2.yaml"
+        );
 
         Thread.sleep(1000);
     }

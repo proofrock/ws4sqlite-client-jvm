@@ -7,7 +7,7 @@ requests being well formed and by mapping errors to JDK's exceptions.
 ## Compatibility
 
 Each client's minor release is guaranteed to be compatible with the matching minor release of ws4sqlite. So, for
-ws4sqlite's version `0.10.0`, use any of the client's `0.10.x` versions.
+ws4sqlite's version `0.11.0`, use any of the client's `0.11.x` versions.
 
 The library requires Java 8 or higher.
 
@@ -19,14 +19,14 @@ In maven:
 <dependency>
     <groupId>it.germanorizzo.ws4sqlite</groupId>
     <artifactId>ws4sqlite-client-jvm</artifactId>
-    <version>0.10.0</version>
+    <version>0.11.0</version>
 </dependency>
 ```
 
 Or gradle:
 
 ```
-implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.10.0'
+implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.11.0'
 ```
 
 # Usage
