@@ -28,7 +28,7 @@ afterEvaluate {
                         developer {
                             id = 'germanorizzo'
                             name = 'Germano Rizzo'
-                            email = 'oss@germanorizzo.it'
+                            email = 'oss /AT/ germanorizzo /DOT/ it'
                         }
                     }
 

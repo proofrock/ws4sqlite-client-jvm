@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2022-, Germano Rizzo <oss@germanorizzo.it>
+  Copyright (c) 2022-, Germano Rizzo <oss /AT/ germanorizzo /DOT/ it>
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose with or without fee is hereby granted, provided that the above
@@ -33,7 +33,7 @@ class LibraryTest {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
         p = Runtime.getRuntime().exec(
-                "src/test/resources/ws4sqlite-0.11.0-macos --mem-db mydb:src/test/resources/mydb.yaml --mem-db mydb2:src/test/resources/mydb2.yaml"
+                "src/test/resources/ws4sqlite-0.11.0 --mem-db mydb:src/test/resources/mydb.yaml --mem-db mydb2:src/test/resources/mydb2.yaml"
         );
 
         Thread.sleep(1000);
