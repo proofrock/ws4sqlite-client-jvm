@@ -6,8 +6,13 @@ requests being well formed and by mapping errors to JDK's exceptions.
 
 ## Compatibility
 
-Each client's minor release is guaranteed to be compatible with the matching minor release of ws4sqlite. So, for
-ws4sqlite's version `0.11.0`, use any of the client's `0.11.x` versions.
+Compatibility is guaranteed as follows:
+
+| ws4sqlite version                    | this library version |
+|--------------------------------------|----------------------|
+| 0.9.x                                | 0.9.x                |
+| 0.10.x                               | 0.10.x               |
+| 0.11.x, 0.12.x, **0.13.x** (current) | **0.11.x** (current) |
 
 The library requires Java 8 or higher.
 
