@@ -24,14 +24,14 @@ In maven:
 <dependency>
     <groupId>it.germanorizzo.ws4sqlite</groupId>
     <artifactId>ws4sqlite-client-jvm</artifactId>
-    <version>0.11.0</version>
+    <version>0.11.1</version>
 </dependency>
 ```
 
 Or gradle:
 
 ```
-implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.11.0'
+implementation group: 'it.germanorizzo.ws4sqlite', name: 'ws4sqlite-client-jvm', version: '0.11.1'
 ```
 
 # Usage
