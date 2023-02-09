@@ -33,7 +33,7 @@ class LibraryTest {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
 
         p = Runtime.getRuntime().exec(
-                "src/test/resources/ws4sqlite-0.11.0 --mem-db mydb:src/test/resources/mydb.yaml --mem-db mydb2:src/test/resources/mydb2.yaml"
+                "src/test/resources/ws4sqlite-0.13.0.exe --mem-db mydb:src/test/resources/mydb.yaml --mem-db mydb2:src/test/resources/mydb2.yaml"
         );
 
         Thread.sleep(1000);
